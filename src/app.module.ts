@@ -1,24 +1,33 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsuariosModule } from './usuarios/usuarios.module';
+import { DocenteModule } from './docente/docente.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TareasModule } from './tareas/tareas.module';
+import { AsignaturaModule } from './asignatura/asignatura.module';
+import { EstudianteModule } from './estudiante/estudiante.module';
+import { GrupoModule } from './grupo/grupo.module';
+import { DocenteGrupoModule } from './docente_grupo/docente_grupo.module';
 
 @Module({
-  imports: [UsuariosModule,
+  imports: [
+    DocenteModule,
+    AsignaturaModule,
+    EstudianteModule,
+    GrupoModule,
+    DocenteGrupoModule,
+
+
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'user',
-      password: 'password123',
-      database: 'tareasApp',
+      username: 'postgres',
+      password: 'secret',
+      database: 'desarrollo',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    TareasModule,
-  
+
   ],
   controllers: [AppController],
   providers: [AppService],

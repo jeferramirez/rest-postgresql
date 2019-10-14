@@ -1,21 +1,24 @@
 import { Controller, Post, Body, Res, HttpStatus, Get, Param, Delete, Put } from '@nestjs/common';
-import { UsuarioService } from './usuario.service';
+import { DocenteService } from './docente.service';
 
-@Controller('usuarios')
-export class UsuariosController {
+@Controller('docente')
+export class DocenteController {
 
- constructor( private usuarioService: UsuarioService ) {}
+ constructor( private usuarioService: DocenteService ) {}
 
  @Post()
   async create(@Body() usuario: any, @Res()resp ) {
 
     try {
     const user =  await this.usuarioService.createUser(usuario);
-    resp.status(HttpStatus.CREATED).json(user);
+
+    resp.status(HttpStatus.CREATED).json(
+
+      {status: HttpStatus.CREATED, data: user});
 
     } catch (error) {
 
-     resp.status(HttpStatus.FORBIDDEN).json({mensaje: 'error en la creación del usuario'});
+     resp.status(HttpStatus.FORBIDDEN).json({mensaje: 'error en la creación del usuario', error});
     }
 
 
@@ -65,7 +68,7 @@ export class UsuariosController {
         const user =  await this.usuarioService.updatedUser(usuario);
         return res.status(HttpStatus.OK).json(user);
     } catch (error) {
-        return  res.status(HttpStatus.FORBIDDEN).json({mensaje: 'error editando el usuario '});
+        return  res.status(HttpStatus.BAD_REQUEST).json({mensaje: 'error editando el usuario '});
  
     }
   }

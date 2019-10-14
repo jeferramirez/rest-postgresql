@@ -1,7 +1,7 @@
 export class UsuarioDto {
+    readonly codDocente: string;
     readonly nombre: string;
     readonly apellido: string;
-    readonly email: string;
-    readonly fecha_creacion: string;
+    readonly fechaCreacion: string;
     readonly estado: boolean;
 }
