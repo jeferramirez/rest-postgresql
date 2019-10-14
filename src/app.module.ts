@@ -7,6 +7,7 @@ import { AsignaturaModule } from './asignatura/asignatura.module';
 import { EstudianteModule } from './estudiante/estudiante.module';
 import { GrupoModule } from './grupo/grupo.module';
 import { DocenteGrupoModule } from './docente_grupo/docente_grupo.module';
+import { MatriculaModule } from './matricula/matricula.module';
 
 @Module({
   imports: [
@@ -15,8 +16,7 @@ import { DocenteGrupoModule } from './docente_grupo/docente_grupo.module';
     EstudianteModule,
     GrupoModule,
     DocenteGrupoModule,
-
-
+    MatriculaModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',

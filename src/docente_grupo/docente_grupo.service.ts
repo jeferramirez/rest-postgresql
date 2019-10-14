@@ -14,7 +14,7 @@ export class DocenteGrupoService {
 
   async findAll(): Promise<DocenteGrupo[]> {
     try {
-      return await this.grpRepo.find({ relations: ['cod'] });
+      return await this.grpRepo.find({ relations: ['cod', 'codGrupo'] });
 
     } catch (error) {
       return error;

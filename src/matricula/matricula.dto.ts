@@ -1,4 +1,4 @@
-export class UsuarioDto {
+export class MatriculaDto {
     readonly codDocente: string;
     readonly nombre: string;
     readonly apellido: string;
