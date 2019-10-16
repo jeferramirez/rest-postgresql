@@ -1,10 +1,10 @@
 import { Controller, Post, Body, Res, HttpStatus, Get, Param, Delete, Put } from '@nestjs/common';
-import { MatriculaService } from './matricula.service';
+import { UsuarioService } from './usuario.service';
 
-@Controller('matricula')
-export class MatriculaController {
+@Controller('usuario')
+export class UsuarioController {
 
-  constructor(private matriculaService: MatriculaService) { }
+  constructor(private matriculaService: UsuarioService) { }
 
   @Post()
   async create(@Body() matricula: any, @Res() resp) {

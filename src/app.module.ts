@@ -8,15 +8,17 @@ import { EstudianteModule } from './estudiante/estudiante.module';
 import { GrupoModule } from './grupo/grupo.module';
 import { DocenteGrupoModule } from './docente_grupo/docente_grupo.module';
 import { MatriculaModule } from './matricula/matricula.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @Module({
   imports: [
-    DocenteModule,
+  DocenteModule,
     AsignaturaModule,
     EstudianteModule,
     GrupoModule,
     DocenteGrupoModule,
     MatriculaModule,
+    UsuarioModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',

@@ -13,21 +13,34 @@ export class MatriculaService {
   ) { }
 
 
-  async findAll(): Promise<Matricula[]> {
+  async findByCod(codigo: string): Promise<Matricula[]> {
 
     try {
-      return await this.matriculaRepo.find();
-      
+      return await this.matriculaRepo.find({
+        relations: ['codAsignatura', 'codEstudiante', 'codGrupo'],
+        where: [{ codEstudiante: codigo }]
+      });
+
     } catch (error) {
       return error;
     }
   }
 
+
+  async findAll(): Promise<Matricula[]> {
+
+    try {
+      return await this.matriculaRepo.find({ relations: ['codAsignatura', 'codEstudiante', 'codGrupo'] });
+
+    } catch (error) {
+      return error;
+    }
+  }
   async findOne(id: string): Promise<Matricula> {
 
     try {
       return await this.matriculaRepo.findOne(id);
-      
+
     } catch (error) {
       return error;
     }
@@ -48,10 +61,14 @@ export class MatriculaService {
 
   async updatedOne(matricula: any) {
 
-    // const nuevo = new Matricula();
-    const usuarioActualizar = await this.matriculaRepo.findOne(matricula.id);
+    //const matriculaAct = new Matricula();
+    console.log(matricula);
 
-    return await this.matriculaRepo.save(usuarioActualizar);
+    const matriculaAct = await this.matriculaRepo.findOne(matricula.id);
+    matriculaAct.parcialUno =  matricula.parcialUno;
+    matriculaAct.parcialDos = matricula.parcialDos;
+    matriculaAct.parcialTres = matricula.parcialTres;
+    return await this.matriculaRepo.save(matriculaAct);
 
 
   }

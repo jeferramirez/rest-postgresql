@@ -8,7 +8,7 @@ export class Matricula {
 
   @PrimaryColumn()
   id: string;
-  
+
   @ManyToOne(type => Asignatura, asignatura => asignatura.codAsignatura, {  cascade: true })
   @JoinColumn({ name: 'cod_asignatura'})
   codAsignatura: Asignatura;

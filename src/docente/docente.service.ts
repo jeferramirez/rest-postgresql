@@ -7,56 +7,68 @@ import { Repository } from 'typeorm/repository/Repository';
 export class DocenteService {
 
 
-    constructor(
-        @InjectRepository(Docente)
-        private readonly usuarioRepository: Repository<Docente>,
-    ) {}
+  constructor(
+    @InjectRepository(Docente)
+    private readonly usuarioRepository: Repository<Docente>,
+  ) { }
 
 
-     async findAll(): Promise<Docente[]> {
-        return await this.usuarioRepository.find();
-      }
+  async findAll(): Promise<Docente[]> {
 
-      async findOne( idUsuario: number ): Promise<Docente> {
+    try {
+      return await this.usuarioRepository.find();
+
+    } catch (error) {
+
+      return error;
+    }
+  }
+
+  async findOne(idUsuario: number): Promise<Docente> {
+
+     try {
+       return await this.usuarioRepository.findOne(idUsuario);
        
-        return await this.usuarioRepository.findOne( idUsuario );
-      }
+     } catch (error) {
+       return error;
+     }
+  }
 
 
-      async createUser(usuarioNuevo: any): Promise<Docente> {
-       
-        try {
-          return await this.usuarioRepository.save(usuarioNuevo);
+  async createUser(usuarioNuevo: any): Promise<Docente> {
 
-        } catch (err) {
-          
-          return err;
-        }
-      }
+    try {
+      return await this.usuarioRepository.save(usuarioNuevo);
 
-      async updatedUser(usuarioNuevo: any) {
-       
-        // const nuevo = new Docente();
-        const usuarioActualizar = await this.usuarioRepository.findOne(usuarioNuevo.id);
+    } catch (err) {
 
-        usuarioActualizar.apellidos = usuarioNuevo.apellidos;
-        usuarioActualizar.nombres = usuarioNuevo.nombres;
-        usuarioActualizar.estado = usuarioNuevo.estado;
-        usuarioActualizar.codDocente = usuarioNuevo.codDocente;
+      return err;
+    }
+  }
 
-        return await this.usuarioRepository.save(usuarioActualizar);
+  async updatedUser(usuarioNuevo: any) {
 
+    // const nuevo = new Docente();
+    const usuarioActualizar = await this.usuarioRepository.findOne(usuarioNuevo.id);
 
-       }
+    usuarioActualizar.apellidos = usuarioNuevo.apellidos;
+    usuarioActualizar.nombres = usuarioNuevo.nombres;
+    usuarioActualizar.estado = usuarioNuevo.estado;
+    usuarioActualizar.codDocente = usuarioNuevo.codDocente;
+
+    return await this.usuarioRepository.save(usuarioActualizar);
 
 
-      async deleteOne(usuarioId: number) {
-        try {
-         return await this.usuarioRepository.delete(usuarioId);
-        } catch (err) {
-          return err;
-        }
-      }
+  }
+
+
+  async deleteOne(usuarioId: number) {
+    try {
+      return await this.usuarioRepository.delete(usuarioId);
+    } catch (err) {
+      return err;
+    }
+  }
 
 
 
