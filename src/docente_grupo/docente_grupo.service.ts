@@ -34,7 +34,7 @@ export class DocenteGrupoService {
   }
 
 
-  async createUser(docGrp: any): Promise<DocenteGrupo> {
+  async create(docGrp: any): Promise<DocenteGrupo> {
 
     try {
 
@@ -46,7 +46,7 @@ export class DocenteGrupoService {
     }
   }
 
-  async updatedUser(docGrp: any) {
+  async update(docGrp: any) {
 
     try {
       const grpAct = await this.grpRepo.findOne(docGrp.id);

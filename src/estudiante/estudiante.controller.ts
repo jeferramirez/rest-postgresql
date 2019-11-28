@@ -66,7 +66,7 @@ export class EstudianteController {
 
     try {
         const user =  await this.usuarioService.updatedEstudiante(usuario);
-        return res.status(HttpStatus.OK).json(user);
+        return res.status(HttpStatus.OK).json({ data: user, status: HttpStatus.OK });
     } catch (error) {
         return  res.status(HttpStatus.BAD_REQUEST).json({error, estado: HttpStatus.BAD_REQUEST });
  

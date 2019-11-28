@@ -12,7 +12,7 @@ export class DocenteGrupoController {
 
     try {
 
-    const grp =  await this.docenteGrService.createUser(docenteGrp);
+    const grp =  await this.docenteGrService.create(docenteGrp);
 
     resp.status(HttpStatus.CREATED).json(
 
@@ -67,7 +67,7 @@ export class DocenteGrupoController {
   async updatedOne(@Res() res, @Body()docenteGrp ) {
 
     try {
-        const grp =  await this.docenteGrService.updatedUser(docenteGrp);
+        const grp =  await this.docenteGrService.update(docenteGrp);
         return res.status(HttpStatus.OK).json(grp);
     } catch (error) {
         return  res.status(HttpStatus.BAD_REQUEST).json({error, estado: HttpStatus.BAD_REQUEST });

@@ -51,10 +51,25 @@ export class EstudianteService {
   async updatedEstudiante(estNuevo: any) {
 
     try {
-      const estActualizar = await this.usuarioRepository.findOne(estNuevo.id);
+      const estActualizar = await this.usuarioRepository.findOne(estNuevo.codEst);
 
       estActualizar.apellidos = estNuevo.apellidos;
       estActualizar.nombres = estNuevo.nombres;
+      estActualizar.celular = estNuevo.celular;
+      estActualizar.telefono = estNuevo.telefono;
+      estActualizar.sexo = estNuevo.sexo;
+      estActualizar.direccion = estNuevo.direccion;
+      estActualizar.programa = estNuevo.programa;
+      estActualizar.facultad = estNuevo.facultad;
+      estActualizar.formulario = estNuevo.formulario;
+      estActualizar.formularioEntregado = estNuevo.formularioEntregado;
+      estActualizar.asiste = estNuevo.asiste;
+      estActualizar.desistio = estNuevo.desistio;
+      estActualizar.llamado = estNuevo.llamado;
+      estActualizar.observaciones = estNuevo.observaciones;
+
+
+
       estActualizar.estado = estNuevo.estado;
 
       return await this.usuarioRepository.save(estActualizar);

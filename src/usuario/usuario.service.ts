@@ -39,6 +39,8 @@ export class UsuarioService {
       return error;
     }
   }
+
+  // modificar a unico el email y que busque por el
   async findOne(id: string): Promise<Usuario> {
 
     try {

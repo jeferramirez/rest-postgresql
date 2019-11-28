@@ -1,20 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm/repository/Repository';
-import * as bcrypt from 'bcrypt';
+import { UsuarioService } from '../usuario/usuario.service';
+import { JwtService } from '@nestjs/jwt';
+
 
 @Injectable()
 export class AuthService {
 
-  private saltRounds = 10;
+  constructor(private userService: UsuarioService,
+              private readonly jwtService: JwtService) { }
 
+  async validateUser(email: string, pass: string): Promise<any> {
+    const user = await this.userService.findOne(email);
 
-  constructor() { }
+    if (user &&  this.userService.compareHash( pass, user.passwordHash)) {
 
-
-  async findByCod(codigo: string) {
-
-
-
+      return user;
+    }
+    return null;
   }
+
+
+
+  async login(user: any) {
+    const payload = { username: user.email, sub: user.id };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
+
 }

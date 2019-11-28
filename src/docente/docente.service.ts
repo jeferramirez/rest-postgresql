@@ -49,12 +49,11 @@ export class DocenteService {
   async updatedUser(usuarioNuevo: any) {
 
     // const nuevo = new Docente();
-    const usuarioActualizar = await this.usuarioRepository.findOne(usuarioNuevo.id);
+    const usuarioActualizar = await this.usuarioRepository.findOne(usuarioNuevo.codDocente);
 
     usuarioActualizar.apellidos = usuarioNuevo.apellidos;
     usuarioActualizar.nombres = usuarioNuevo.nombres;
     usuarioActualizar.estado = usuarioNuevo.estado;
-    usuarioActualizar.codDocente = usuarioNuevo.codDocente;
 
     return await this.usuarioRepository.save(usuarioActualizar);
 

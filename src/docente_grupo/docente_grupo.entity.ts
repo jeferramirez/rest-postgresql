@@ -1,11 +1,10 @@
-import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne, JoinColumn, Index, PrimaryGeneratedColumn } from 'typeorm';
 import { Docente } from '../docente/docente.entity';
 import { Grupo } from '../grupo/grupo.entity';
 @Entity()
+@Index(['cod', 'codGrupo'], { unique: true })
 export class DocenteGrupo {
-
-
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ManyToOne(type => Docente, docente => docente.codDocente, {  cascade: true })

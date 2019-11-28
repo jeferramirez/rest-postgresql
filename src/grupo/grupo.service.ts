@@ -49,7 +49,7 @@ export class GrupoService {
   async updateGrupo(grupoNuevo: any) {
 
     try {
-      const grupoAct = await this.grupoRepo.findOne(grupoNuevo.id);
+      const grupoAct = await this.grupoRepo.findOne(grupoNuevo.cod);
       grupoAct.jornada = grupoNuevo.jornada;
       grupoAct.estado = grupoNuevo.estado;
       grupoAct.nombre = grupoNuevo.nombre;
