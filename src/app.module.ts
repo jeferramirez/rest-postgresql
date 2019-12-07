@@ -13,7 +13,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-  DocenteModule,
+      DocenteModule,
       AsignaturaModule,
       EstudianteModule,
       GrupoModule,

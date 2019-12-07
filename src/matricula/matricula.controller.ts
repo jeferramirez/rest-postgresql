@@ -37,6 +37,19 @@ export class MatriculaController {
     }
   }
 
+  @Get('grupo/:id')
+  async getByCodGrupo(@Res() res, @Param('id') idGrupo) {
+
+    try {
+
+      const grupos = await this.matriculaService.findByGrupo(idGrupo);
+      res.status(HttpStatus.OK).json(grupos);
+    } catch (error) {
+      res.status(HttpStatus.BAD_REQUEST).json({ error, estado: HttpStatus.BAD_REQUEST });
+
+    }
+  }
+
   @Get('estudiante/:idEst/:id')
   async getMatriculByEst(@Res() res, @Param('id') codAsig, @Param('idEst') codEst ) {
 

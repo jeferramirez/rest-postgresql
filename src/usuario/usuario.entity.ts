@@ -10,6 +10,9 @@ export class Usuario {
   @Column({ length: 50, unique: true })
   username: string;
 
+  @Column({ length: 50, unique: true })
+  rol: string;
+
   @Column({ length: 100, nullable: true })
   password: string|undefined;
 

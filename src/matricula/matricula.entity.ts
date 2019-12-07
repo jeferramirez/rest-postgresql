@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, BeforeInsert, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, BeforeInsert, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Asignatura } from 'src/asignatura/asignatura.entity';
 import { Estudiante } from 'src/estudiante/estudiante.entity';
 import { DocenteGrupo } from 'src/docente_grupo/docente_grupo.entity';
@@ -6,7 +6,7 @@ import { DocenteGrupo } from 'src/docente_grupo/docente_grupo.entity';
 @Entity()
 export class Matricula {
 
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ManyToOne(type => Asignatura, asignatura => asignatura.codAsignatura, {  cascade: true })

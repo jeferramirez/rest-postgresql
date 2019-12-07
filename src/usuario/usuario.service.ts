@@ -12,14 +12,14 @@ export class UsuarioService {
 
   constructor(
     @InjectRepository(Usuario)
-    private readonly matriculaRepo: Repository<Usuario>,
+    private readonly userRepo: Repository<Usuario>,
   ) { }
 
 
   async findByCod(codigo: string): Promise<Usuario[]> {
 
     try {
-      return await this.matriculaRepo.find({
+      return await this.userRepo.find({
         relations: ['codAsignatura', 'codEstudiante', 'codGrupo'],
         where: [{ codEstudiante: codigo }]
       });
@@ -33,7 +33,7 @@ export class UsuarioService {
   async findAll(): Promise<Usuario[]> {
 
     try {
-      return await this.matriculaRepo.find({ relations: ['codAsignatura', 'codEstudiante', 'codGrupo'] });
+      return await this.userRepo.find({ relations: ['codAsignatura', 'codEstudiante', 'codGrupo'] });
 
     } catch (error) {
       return error;
@@ -41,10 +41,12 @@ export class UsuarioService {
   }
 
   // modificar a unico el email y que busque por el
-  async findOne(id: string): Promise<Usuario> {
+  async findOne(email: string): Promise<any> {
 
     try {
-      return await this.matriculaRepo.findOne(id);
+      return await this.userRepo.findOne({
+        where: [{ email }],
+      });
 
     } catch (error) {
       return error;
@@ -60,7 +62,7 @@ export class UsuarioService {
       user.passwordHash = await this.getHash(user.password);
       // no almacenar el password
       user.password = undefined;
-      return await this.matriculaRepo.save(user);
+      return await this.userRepo.save(user);
 
     } catch (err) {
 
@@ -70,10 +72,10 @@ export class UsuarioService {
 
   async updatedOne(user: any) {
 
-    const userAct = await this.matriculaRepo.findOne(user.id);
+    const userAct = await this.userRepo.findOne(user.id);
     userAct.email = user.email;
     userAct.username = user.username;
-    return await this.matriculaRepo.save(userAct);
+    return await this.userRepo.save(userAct);
 
 
   }
@@ -81,7 +83,7 @@ export class UsuarioService {
 
   async deleteOne(usuarioId: number) {
     try {
-      return await this.matriculaRepo.delete(usuarioId);
+      return await this.userRepo.delete(usuarioId);
     } catch (err) {
       return err;
     }
@@ -93,9 +95,8 @@ export class UsuarioService {
     return bcrypt.hash(password, this.saltRounds);
   }
 
-  async compareHash(password: string | undefined, hash: string | undefined): Promise<boolean> {
-    return bcrypt.compare(password, hash);
+   async compareHash(password: string, hash: string) {
+    return await bcrypt.compare(password, hash);
   }
-
 
 }

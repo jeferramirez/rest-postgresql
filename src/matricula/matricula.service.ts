@@ -26,6 +26,18 @@ export class MatriculaService {
     }
   }
 
+  async findByGrupo(codigoGrp: string): Promise<Matricula[]> {
+
+    try {
+      return await this.matriculaRepo.find({
+        relations: ['codAsignatura', 'codEstudiante', 'codGrupo'],
+        where: [{ codGrupo: codigoGrp }]
+      });
+
+    } catch (error) {
+      return error;
+    }
+  }
 
   async findAll(): Promise<Matricula[]> {
 
@@ -71,6 +83,9 @@ export class MatriculaService {
     matriculaAct.parcialUno = matricula.parcialUno;
     matriculaAct.parcialDos = matricula.parcialDos;
     matriculaAct.parcialTres = matricula.parcialTres;
+    matriculaAct.notasAdicionales = matricula.notasAdicionales;
+    matriculaAct.proyecto = matricula.proyecto;
+
     return await this.matriculaRepo.save(matriculaAct);
 
 
